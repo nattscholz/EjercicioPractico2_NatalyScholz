@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Formulario de cita médica</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-8 col-lg-7">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+
+                            <h1 class="h4 mb-0"
+                                th:text="${citaMedica.id == null}
+                                ? 'Agregar cita médica'
+                                : 'Editar cita médica'">
+                                Formulario de cita
+                            </h1>
+
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <form th:action="@{/citas/guardar}"
+                                  th:object="${citaMedica}"
+                                  method="post">
+
+                                <input type="hidden"
+                                       th:field="*{id}">
+
+                                <div class="mb-3">
+
+                                    <label for="pacienteNombre"
+                                           class="form-label">
+                                        Nombre del paciente
+                                    </label>
+
+                                    <input type="text"
+                                           id="pacienteNombre"
+                                           th:field="*{pacienteNombre}"
+                                           class="form-control"
+                                           maxlength="150"
+                                           required>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="especialidad"
+                                           class="form-label">
+                                        Especialidad
+                                    </label>
+
+                                    <input type="text"
+                                           id="especialidad"
+                                           th:field="*{especialidad}"
+                                           class="form-control"
+                                           placeholder="Ejemplo: Pediatría"
+                                           maxlength="100"
+                                           required>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="fecha"
+                                           class="form-label">
+                                        Fecha de la cita
+                                    </label>
+
+                                    <input type="date"
+                                           id="fecha"
+                                           th:field="*{fecha}"
+                                           class="form-control"
+                                           required>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="costo"
+                                           class="form-label">
+                                        Costo
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            ₡
+                                        </span>
+
+                                        <input type="number"
+                                               id="costo"
+                                               th:field="*{costo}"
+                                               class="form-control"
+                                               min="0"
+                                               step="0.01"
+                                               required>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-check mb-4">
+
+                                    <input type="checkbox"
+                                           id="activa"
+                                           th:field="*{activa}"
+                                           class="form-check-input">
+
+                                    <label for="activa"
+                                           class="form-check-label">
+                                        Cita activa
+                                    </label>
+
+                                </div>
+
+                                <div class="d-flex gap-2">
+
+                                    <button type="submit"
+                                            class="btn btn-primary">
+                                        Guardar
+                                    </button>
+
+                                    <a th:href="@{/citas}"
+                                       class="btn btn-outline-secondary">
+                                        Cancelar
+                                    </a>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Detalle de la cita médica</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-8 col-lg-7">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+
+                            <h1 class="h4 mb-0">
+                                Detalle de la cita médica
+                            </h1>
+
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <dl class="row mb-0">
+
+                                <dt class="col-sm-4">
+                                    Identificador
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${citaMedica.id}">
+                                    1
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Paciente
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${citaMedica.pacienteNombre}">
+                                    Carlos Gómez
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Especialidad
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${citaMedica.especialidad}">
+                                    Cardiología
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Fecha de la cita
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${citaMedica.fecha}">
+                                    2026-05-10
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Costo
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="'₡'
+                                    + ${#numbers.formatDecimal(
+                                    citaMedica.costo, 1, 2)}">
+                                    ₡45000.00
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Estado
+                                </dt>
+
+                                <dd class="col-sm-8">
+
+                                    <span th:if="${citaMedica.activa}"
+                                          class="badge bg-success">
+                                        Activa
+                                    </span>
+
+                                    <span th:unless="${citaMedica.activa}"
+                                          class="badge bg-danger">
+                                        Inactiva
+                                    </span>
+
+                                </dd>
+
+                            </dl>
+
+                        </div>
+
+                        <div class="card-footer bg-white p-4">
+
+                            <div class="d-flex gap-2">
+
+                                <a th:href="@{/citas/editar/{id}
+                                   (id=${citaMedica.id})}"
+                                   class="btn btn-warning">
+                                    Editar
+                                </a>
+
+                                <a th:href="@{/citas}"
+                                   class="btn btn-outline-secondary">
+                                    Volver al listado
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>

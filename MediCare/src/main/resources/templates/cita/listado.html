@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Gestión de citas médicas</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="d-flex justify-content-between
+                        align-items-center mb-4">
+
+                <div>
+                    <h1 class="h2 mb-1">
+                        Gestión de citas médicas
+                    </h1>
+
+                    <p class="text-muted mb-0">
+                        Administre las citas registradas
+                        en MediCare.
+                    </p>
+                </div>
+
+                <a th:href="@{/citas/nueva}"
+                   class="btn btn-primary">
+                    Agregar cita
+                </a>
+
+            </div>
+
+            <div th:if="${#lists.isEmpty(citas)}"
+                 class="alert alert-info">
+
+                No hay citas médicas registradas.
+
+            </div>
+
+            <div th:unless="${#lists.isEmpty(citas)}"
+                 class="card border-0 shadow-sm">
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover
+                                      align-middle mb-0">
+
+                            <thead class="table-primary">
+                                <tr>
+                                    <th class="ps-4">ID</th>
+                                    <th>Paciente</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha</th>
+                                    <th>Costo</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr th:each="cita : ${citas}">
+
+                                    <td class="ps-4"
+                                        th:text="${cita.id}">
+                                        1
+                                    </td>
+
+                                    <td th:text="${cita.pacienteNombre}">
+                                        Carlos Gómez
+                                    </td>
+
+                                    <td th:text="${cita.especialidad}">
+                                        Cardiología
+                                    </td>
+
+                                    <td th:text="${cita.fecha}">
+                                        2026-05-10
+                                    </td>
+
+                                    <td th:text="'₡'
+                                        + ${#numbers.formatDecimal(
+                                        cita.costo, 1, 2)}">
+                                        ₡45000.00
+                                    </td>
+
+                                    <td>
+
+                                        <span th:if="${cita.activa}"
+                                              class="badge bg-success">
+                                            Activa
+                                        </span>
+
+                                        <span th:unless="${cita.activa}"
+                                              class="badge bg-danger">
+                                            Inactiva
+                                        </span>
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a th:href="@{/citas/detalle/{id}
+                                           (id=${cita.id})}"
+                                           class="btn btn-info
+                                                  btn-sm text-white">
+                                            Detalle
+                                        </a>
+
+                                        <a th:href="@{/citas/editar/{id}
+                                           (id=${cita.id})}"
+                                           class="btn btn-warning btn-sm">
+                                            Editar
+                                        </a>
+
+                                        <a th:href="@{/citas/eliminar/{id}
+                                           (id=${cita.id})}"
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm(
+                                           '¿Desea eliminar esta cita?'
+                                           );">
+                                            Eliminar
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+
+                <a th:href="@{/}"
+                   class="btn btn-outline-secondary">
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>
