@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>MediCare</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main>
+
+            <section class="bg-primary text-white py-5">
+                <div class="container text-center py-4">
+
+                    <h1 class="display-4 fw-bold">
+                        Bienvenido a MediCare
+                    </h1>
+
+                    <p class="lead mb-0">
+                        Plataforma para administrar usuarios, roles
+                        y citas médicas del centro de salud.
+                    </p>
+
+                </div>
+            </section>
+
+            <section class="container py-5">
+
+                <div class="text-center mb-5">
+                    <h2>Administración del sistema</h2>
+
+                    <p class="text-muted">
+                        Seleccione el módulo que desea consultar.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body text-center p-4">
+                                <h3 class="h4">Usuarios</h3>
+
+                                <p class="text-muted">
+                                    Administre los usuarios registrados
+                                    y sus roles correspondientes.
+                                </p>
+
+                                <a th:href="@{/usuarios}"
+                                   class="btn btn-primary">
+                                    Gestionar usuarios
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body text-center p-4">
+                                <h3 class="h4">Roles</h3>
+
+                                <p class="text-muted">
+                                    Consulte y administre los roles
+                                    disponibles en MediCare.
+                                </p>
+
+                                <a th:href="@{/roles}"
+                                   class="btn btn-primary">
+                                    Gestionar roles
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body text-center p-4">
+                                <h3 class="h4">Citas médicas</h3>
+
+                                <p class="text-muted">
+                                    Registre, consulte y actualice
+                                    las citas médicas.
+                                </p>
+
+                                <a th:href="@{/citas}"
+                                   class="btn btn-primary">
+                                    Gestionar citas
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>

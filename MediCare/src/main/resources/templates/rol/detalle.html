@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Detalle del rol</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-7 col-lg-6">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+                            <h1 class="h4 mb-0">
+                                Detalle del rol
+                            </h1>
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <dl class="row mb-0">
+
+                                <dt class="col-sm-4">
+                                    Identificador
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${rol.id}">
+                                    1
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Nombre
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${rol.nombre}">
+                                    ADMIN
+                                </dd>
+
+                            </dl>
+
+                        </div>
+
+                        <div class="card-footer bg-white p-4">
+
+                            <div class="d-flex gap-2">
+
+                                <a th:href="@{/roles/editar/{id}
+                                   (id=${rol.id})}"
+                                   class="btn btn-warning">
+                                    Editar
+                                </a>
+
+                                <a th:href="@{/roles}"
+                                   class="btn btn-outline-secondary">
+                                    Volver al listado
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Detalle del usuario</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-8 col-lg-7">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+
+                            <h1 class="h4 mb-0">
+                                Detalle del usuario
+                            </h1>
+
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <dl class="row mb-0">
+
+                                <dt class="col-sm-4">
+                                    Identificador
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${usuario.id}">
+                                    1
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Nombre
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${usuario.nombre}">
+                                    Admin General
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Correo electrónico
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${usuario.email}">
+                                    admin@medicare.com
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Rol
+                                </dt>
+
+                                <dd class="col-sm-8">
+
+                                    <span class="badge bg-secondary"
+                                          th:text="${usuario.rol.nombre}">
+                                        ADMIN
+                                    </span>
+
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Estado
+                                </dt>
+
+                                <dd class="col-sm-8">
+
+                                    <span th:if="${usuario.activo}"
+                                          class="badge bg-success">
+                                        Activo
+                                    </span>
+
+                                    <span th:unless="${usuario.activo}"
+                                          class="badge bg-danger">
+                                        Inactivo
+                                    </span>
+
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    Fecha de creación
+                                </dt>
+
+                                <dd class="col-sm-8"
+                                    th:text="${usuario.fechaCreacion}">
+                                    2026-08-12
+                                </dd>
+
+                            </dl>
+
+                        </div>
+
+                        <div class="card-footer bg-white p-4">
+
+                            <div class="d-flex gap-2">
+
+                                <a th:href="@{/usuarios/editar/{id}
+                                   (id=${usuario.id})}"
+                                   class="btn btn-warning">
+                                    Editar
+                                </a>
+
+                                <a th:href="@{/usuarios}"
+                                   class="btn btn-outline-secondary">
+                                    Volver al listado
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>

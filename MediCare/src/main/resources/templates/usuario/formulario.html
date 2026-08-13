@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Formulario de usuario</title>
+    </head>
+
+    <body class="bg-light">
+
+        <header th:replace="~{general/fragmentos :: navbar}">
+        </header>
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-8 col-lg-7">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+
+                            <h1 class="h4 mb-0"
+                                th:text="${usuario.id == null}
+                                ? 'Agregar usuario'
+                                : 'Editar usuario'">
+                                Formulario de usuario
+                            </h1>
+
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <form th:action="@{/usuarios/guardar}"
+                                  th:object="${usuario}"
+                                  method="post">
+
+                                <input type="hidden"
+                                       th:field="*{id}">
+
+                                <div class="mb-3">
+
+                                    <label for="nombre"
+                                           class="form-label">
+                                        Nombre completo
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombre"
+                                           th:field="*{nombre}"
+                                           class="form-control"
+                                           maxlength="150"
+                                           required>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="email"
+                                           class="form-label">
+                                        Correo electrónico
+                                    </label>
+
+                                    <input type="email"
+                                           id="email"
+                                           th:field="*{email}"
+                                           class="form-control"
+                                           maxlength="200"
+                                           required>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="password"
+                                           class="form-label">
+                                        Contraseña
+                                    </label>
+
+                                    <input type="password"
+                                           id="password"
+                                           name="password"
+                                           class="form-control"
+                                           th:required="${usuario.id == null}">
+
+                                    <div th:if="${usuario.id != null}"
+                                         class="form-text">
+                                        Déjela vacía para conservar
+                                        la contraseña actual.
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="rolId"
+                                           class="form-label">
+                                        Rol
+                                    </label>
+
+                                    <select id="rolId"
+                                            name="rolId"
+                                            class="form-select"
+                                            required>
+
+                                        <option value="">
+                                            Seleccione un rol
+                                        </option>
+
+                                        <option th:each="rol : ${roles}"
+                                                th:value="${rol.id}"
+                                                th:text="${rol.nombre}"
+                                                th:selected="${usuario.rol != null
+                                                and usuario.rol.id == rol.id}">
+                                            ADMIN
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-check mb-4">
+
+                                    <input type="checkbox"
+                                           id="activo"
+                                           th:field="*{activo}"
+                                           class="form-check-input">
+
+                                    <label for="activo"
+                                           class="form-check-label">
+                                        Usuario activo
+                                    </label>
+
+                                </div>
+
+                                <div class="d-flex gap-2">
+
+                                    <button type="submit"
+                                            class="btn btn-primary">
+                                        Guardar
+                                    </button>
+
+                                    <a th:href="@{/usuarios}"
+                                       class="btn btn-outline-secondary">
+                                        Cancelar
+                                    </a>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>
