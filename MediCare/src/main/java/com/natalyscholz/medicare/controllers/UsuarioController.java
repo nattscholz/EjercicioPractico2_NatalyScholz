@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 public class UsuarioController {
@@ -30,6 +31,9 @@ public class UsuarioController {
 
     @Autowired
     private RolService rolService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/usuarios")
     public String listar(Model model) {
@@ -58,9 +62,7 @@ public class UsuarioController {
             return "redirect:/usuarios";
         }
 
-        if (usuario.getId() != null
-                && (usuario.getPassword() == null
-                || usuario.getPassword().isBlank())) {
+        if (usuario.getId() != null) {
 
             Usuario usuarioExistente
                     = usuarioService.getUsuario(usuario.getId());
@@ -69,7 +71,29 @@ public class UsuarioController {
                 return "redirect:/usuarios";
             }
 
-            usuario.setPassword(usuarioExistente.getPassword());
+            if (usuario.getPassword() == null
+                    || usuario.getPassword().isBlank()) {
+
+                usuario.setPassword(
+                        usuarioExistente.getPassword()
+                );
+
+            } else {
+
+                usuario.setPassword(
+                        passwordEncoder.encode(
+                                usuario.getPassword()
+                        )
+                );
+            }
+
+        } else {
+
+            usuario.setPassword(
+                    passwordEncoder.encode(
+                            usuario.getPassword()
+                    )
+            );
         }
 
         usuario.setRol(rol);
