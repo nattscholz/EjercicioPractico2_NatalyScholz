@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>Iniciar sesión</title>
+    </head>
+
+    <body class="bg-light">
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-6 col-lg-5">
+
+                    <div class="text-center mb-4">
+
+                        <h1 class="text-primary fw-bold">
+                            MediCare
+                        </h1>
+
+                        <p class="text-muted">
+                            Plataforma de servicios de salud
+                        </p>
+
+                    </div>
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white py-3">
+
+                            <h2 class="h4 mb-0 text-center">
+                                Iniciar sesión
+                            </h2>
+
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <div th:if="${param.error}"
+                                 class="alert alert-danger">
+
+                                Correo electrónico o contraseña
+                                incorrectos.
+
+                            </div>
+
+                            <div th:if="${param.logout}"
+                                 class="alert alert-success">
+
+                                La sesión se cerró correctamente.
+
+                            </div>
+
+                            <div th:if="${param.registro}"
+                                 class="alert alert-success">
+
+                                Registro completado. Ya puede
+                                iniciar sesión.
+
+                            </div>
+
+                            <form th:action="@{/login}"
+                                  method="post">
+
+                                <div class="mb-3">
+
+                                    <label for="email"
+                                           class="form-label">
+                                        Correo electrónico
+                                    </label>
+
+                                    <input type="email"
+                                           id="email"
+                                           name="email"
+                                           class="form-control"
+                                           placeholder="usuario@correo.com"
+                                           required
+                                           autofocus>
+
+                                </div>
+
+                                <div class="mb-4">
+
+                                    <label for="password"
+                                           class="form-label">
+                                        Contraseña
+                                    </label>
+
+                                    <input type="password"
+                                           id="password"
+                                           name="password"
+                                           class="form-control"
+                                           required>
+
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-primary w-100">
+                                    Iniciar sesión
+                                </button>
+
+                            </form>
+
+                            <hr class="my-4">
+
+                            <div class="text-center">
+
+                                <p class="mb-2">
+                                    ¿No tiene una cuenta?
+                                </p>
+
+                                <a th:href="@{/registro}"
+                                   class="btn btn-outline-primary">
+                                    Registrarse
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}">
+        </footer>
+
+    </body>
+</html>
