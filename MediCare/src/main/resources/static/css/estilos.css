@@ -1,0 +1,531 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 12 ago 2026, 21:57:55
+    Author     : natts
+*/
+
+:root {
+    --medicare-primary: #4569df;
+    --medicare-primary-dark: #304fb9;
+    --medicare-secondary: #738df0;
+    --medicare-background: #f3f6ff;
+    --medicare-surface: #ffffff;
+    --medicare-text: #26324b;
+    --medicare-muted: #7b849a;
+    --medicare-border: #e7ebf5;
+    --medicare-success: #35b987;
+    --medicare-danger: #e45f73;
+    --medicare-warning: #f4b553;
+    --medicare-info: #5ab5d8;
+    --medicare-radius: 18px;
+    --medicare-shadow: 0 12px 35px rgba(54, 78, 145, 0.10);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--medicare-text);
+    background-color: var(--medicare-background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Barra de navegación */
+
+.medicare-navbar {
+    background: linear-gradient(
+        135deg,
+        var(--medicare-primary),
+        var(--medicare-primary-dark)
+    );
+    box-shadow: 0 8px 24px rgba(48, 79, 185, 0.18);
+}
+
+.medicare-navbar .navbar-brand {
+    letter-spacing: 0.4px;
+}
+
+.medicare-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.82);
+    border-radius: 10px;
+    padding: 8px 13px;
+    transition: 0.2s ease;
+}
+
+.medicare-navbar .nav-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Contenido principal */
+
+.medicare-main {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    font-weight: 700;
+    color: var(--medicare-text);
+}
+
+.page-heading p {
+    color: var(--medicare-muted);
+}
+
+/* Tarjetas */
+
+.medicare-card {
+    height: 100%;
+    background-color: var(--medicare-surface);
+    border: 1px solid var(--medicare-border);
+    border-radius: var(--medicare-radius);
+    box-shadow: var(--medicare-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.medicare-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(54, 78, 145, 0.15);
+}
+
+.medicare-card .card-header {
+    color: var(--medicare-text);
+    background-color: transparent;
+    border-bottom: 1px solid var(--medicare-border);
+    padding: 20px 24px;
+    font-weight: 700;
+}
+
+.medicare-card .card-body {
+    padding: 24px;
+}
+
+/* Banner principal */
+
+.dashboard-banner {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #4569df 0%,
+        #6484ec 55%,
+        #8ca4f5 100%
+    );
+    border-radius: 24px;
+    box-shadow: var(--medicare-shadow);
+    padding: 42px;
+}
+
+.dashboard-banner::after {
+    content: "+";
+    position: absolute;
+    right: 45px;
+    top: 5px;
+    color: rgba(255, 255, 255, 0.13);
+    font-size: 170px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.dashboard-banner h1,
+.dashboard-banner p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Indicadores del dashboard */
+
+.stat-card {
+    background-color: white;
+    border: 1px solid var(--medicare-border);
+    border-radius: var(--medicare-radius);
+    box-shadow: var(--medicare-shadow);
+    padding: 24px;
+}
+
+.stat-label {
+    margin-bottom: 8px;
+    color: var(--medicare-muted);
+    font-size: 0.9rem;
+}
+
+.stat-number {
+    margin: 0;
+    color: var(--medicare-primary);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.stat-line {
+    width: 48px;
+    height: 4px;
+    margin-top: 16px;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        var(--medicare-primary),
+        #8ca4f5
+    );
+}
+
+/* Botones */
+
+.btn-primary {
+    background-color: var(--medicare-primary);
+    border-color: var(--medicare-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--medicare-primary-dark);
+    border-color: var(--medicare-primary-dark);
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.btn-info {
+    background-color: var(--medicare-info);
+    border-color: var(--medicare-info);
+}
+
+.btn-danger {
+    background-color: var(--medicare-danger);
+    border-color: var(--medicare-danger);
+}
+
+.btn-warning {
+    background-color: var(--medicare-warning);
+    border-color: var(--medicare-warning);
+}
+
+/* Tablas */
+
+.table-card {
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid var(--medicare-border);
+    border-radius: var(--medicare-radius);
+    box-shadow: var(--medicare-shadow);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    color: var(--medicare-primary-dark);
+    background-color: #edf1ff;
+    border-bottom: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.table tbody td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-color: var(--medicare-border);
+}
+
+/* Formularios */
+
+.form-control,
+.form-select {
+    min-height: 45px;
+    border-color: var(--medicare-border);
+    border-radius: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--medicare-secondary);
+    box-shadow: 0 0 0 0.2rem rgba(69, 105, 223, 0.14);
+}
+
+.form-label {
+    color: var(--medicare-text);
+    font-weight: 600;
+}
+
+/* Login y registro */
+
+.auth-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background:
+        radial-gradient(
+            circle at 80% 25%,
+            rgba(143, 165, 248, 0.75),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 25% 80%,
+            rgba(121, 100, 242, 0.65),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #54a7ef 0%, #d6f0f7 100%);
+}
+
+.auth-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 0;
+    border-radius: 22px;
+    box-shadow: 0 24px 65px rgba(47, 62, 120, 0.22);
+}
+
+.auth-logo {
+    color: var(--medicare-primary);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.auth-subtitle {
+    color: var(--medicare-muted);
+}
+
+/* Footer */
+
+.medicare-footer {
+    color: var(--medicare-muted);
+    background-color: transparent;
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 768px) {
+
+    .dashboard-banner {
+        padding: 30px 24px;
+    }
+
+    .dashboard-banner::after {
+        right: 10px;
+        font-size: 120px;
+    }
+
+    .medicare-main {
+        padding-top: 25px;
+    }
+
+    .table-card {
+        border-radius: 14px;
+    }
+}
+
+/* Barra lateral del dashboard */
+
+.medicare-sidebar {
+    position: fixed;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1030;
+    width: 82px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+    color: white;
+    background: linear-gradient(
+        180deg,
+        var(--medicare-primary),
+        var(--medicare-primary-dark)
+    );
+    border-radius: 22px;
+    box-shadow: 0 18px 40px rgba(48, 79, 185, 0.28);
+}
+
+.sidebar-brand {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--medicare-primary);
+    background-color: white;
+    border-radius: 15px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.sidebar-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 35px;
+}
+
+.sidebar-link {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: 13px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.sidebar-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+.sidebar-symbol {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-label {
+    margin-top: 2px;
+    font-size: 0.58rem;
+}
+
+.sidebar-account {
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+}
+
+.sidebar-user {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.6rem;
+    text-overflow: ellipsis;
+}
+
+.sidebar-logout {
+    width: 46px;
+    height: 42px;
+    padding: 0;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.13);
+    border: 0;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.sidebar-logout:hover {
+    color: var(--medicare-primary-dark);
+    background-color: white;
+}
+
+/* Espacio reservado para el menú lateral */
+
+.medicare-sidebar + main {
+    width: auto;
+    max-width: none;
+    margin-left: 122px;
+    margin-right: 30px;
+}
+
+.medicare-sidebar ~ .medicare-footer {
+    margin-left: 105px;
+}
+
+/* Barra superior dentro del contenido */
+
+.dashboard-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding: 16px 22px;
+    background-color: white;
+    border: 1px solid var(--medicare-border);
+    border-radius: 16px;
+    box-shadow: var(--medicare-shadow);
+}
+
+.dashboard-topbar-title {
+    margin: 0;
+    color: var(--medicare-text);
+    font-weight: 700;
+}
+
+.dashboard-topbar-user {
+    color: var(--medicare-muted);
+    font-size: 0.9rem;
+}
+
+/* Adaptación de la barra lateral */
+
+@media (max-width: 768px) {
+
+    .medicare-sidebar {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        margin: 12px;
+        flex-direction: row;
+        padding: 10px 14px;
+        border-radius: 16px;
+    }
+
+    .sidebar-brand {
+        width: 44px;
+        height: 44px;
+    }
+
+    .sidebar-menu {
+        flex: 1;
+        flex-direction: row;
+        justify-content: center;
+        gap: 4px;
+        margin-top: 0;
+        margin-left: 12px;
+    }
+
+    .sidebar-link {
+        width: 42px;
+        min-height: 42px;
+    }
+
+    .sidebar-label,
+    .sidebar-user {
+        display: none;
+    }
+
+    .sidebar-account {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .medicare-sidebar + main {
+        width: auto;
+        margin: 0;
+    }
+
+    .medicare-sidebar ~ .medicare-footer {
+        margin-left: 0;
+    }
+}

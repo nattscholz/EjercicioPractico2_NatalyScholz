@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.natalyscholz.medicare.service.CorreoService;
+import org.springframework.mail.MailException;
 
 @Controller
 public class RegistroController {
@@ -73,11 +74,18 @@ public class RegistroController {
 
        usuarioService.save(usuario);
 
-        correoService.enviarCorreoBienvenida(
-                usuario.getEmail(),
-                usuario.getNombre()
-        );
+        try {
 
-        return "redirect:/login?registro";
+            correoService.enviarCorreoBienvenida(
+                    usuario.getEmail(),
+                    usuario.getNombre()
+            );
+
+            return "redirect:/login?registro";
+
+        } catch (MailException e) {
+
+            return "redirect:/login?registro&correoError";
+        }
     }
 }

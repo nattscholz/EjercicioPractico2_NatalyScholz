@@ -3,146 +3,140 @@
       xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="~{general/fragmentos :: head}">
-        <title>Registro de usuario</title>
+        <title>Crear cuenta - MediCare</title>
     </head>
 
-    <body class="bg-light">
+    <body class="auth-page">
 
-        <main class="container py-5">
+        <main class="auth-wrapper">
 
-            <div class="row justify-content-center">
+            <div class="auth-card">
 
-                <div class="col-md-7 col-lg-6">
+                <div class="card-body p-4 p-md-5">
 
                     <div class="text-center mb-4">
 
-                        <h1 class="text-primary fw-bold">
+                        <div class="auth-logo mb-2">
                             MediCare
+                        </div>
+
+                        <h1 class="h3 fw-bold mb-2">
+                            Crear una cuenta
                         </h1>
 
-                        <p class="text-muted">
-                            Cree su cuenta como paciente
+                        <p class="auth-subtitle mb-0">
+                            Regístrese para consultar los servicios
+                            y las citas médicas.
                         </p>
 
                     </div>
 
-                    <div class="card border-0 shadow-sm">
+                    <div th:if="${param.existente}"
+                         class="alert alert-warning">
 
-                        <div class="card-header bg-primary text-white py-3">
+                        El correo electrónico ingresado
+                        ya está registrado.
 
-                            <h2 class="h4 mb-0 text-center">
-                                Registro de usuario
-                            </h2>
-
-                        </div>
-
-                        <div class="card-body p-4">
-
-                            <div th:if="${param.existente}"
-                                 class="alert alert-warning">
-
-                                El correo electrónico ingresado
-                                ya está registrado.
-
-                            </div>
-
-                            <div th:if="${param.error}"
-                                 class="alert alert-danger">
-
-                                No fue posible completar el registro.
-                                Verifique que exista el rol PACIENTE.
-
-                            </div>
-
-                            <form th:action="@{/registro/guardar}"
-                                  th:object="${usuario}"
-                                  method="post">
-
-                                <div class="mb-3">
-
-                                    <label for="nombre"
-                                           class="form-label">
-                                        Nombre completo
-                                    </label>
-
-                                    <input type="text"
-                                           id="nombre"
-                                           th:field="*{nombre}"
-                                           class="form-control"
-                                           maxlength="150"
-                                           required
-                                           autofocus>
-
-                                </div>
-
-                                <div class="mb-3">
-
-                                    <label for="email"
-                                           class="form-label">
-                                        Correo electrónico
-                                    </label>
-
-                                    <input type="email"
-                                           id="email"
-                                           th:field="*{email}"
-                                           class="form-control"
-                                           maxlength="200"
-                                           placeholder="usuario@correo.com"
-                                           required>
-
-                                </div>
-
-                                <div class="mb-4">
-
-                                    <label for="password"
-                                           class="form-label">
-                                        Contraseña
-                                    </label>
-
-                                    <input type="password"
-                                           id="password"
-                                           th:field="*{password}"
-                                           class="form-control"
-                                           required>
-
-                                    <div class="form-text">
-                                        La contraseña se almacenará
-                                        de forma codificada.
-                                    </div>
-
-                                </div>
-
-                                <button type="submit"
-                                        class="btn btn-primary w-100">
-                                    Registrarse
-                                </button>
-
-                            </form>
-
-                            <hr class="my-4">
-
-                            <div class="text-center">
-
-                                <p class="mb-2">
-                                    ¿Ya tiene una cuenta?
-                                </p>
-
-                                <a th:href="@{/login}"
-                                   class="btn btn-outline-secondary">
-                                    Volver al inicio de sesión
-                                </a>
-
-                            </div>
-
-                        </div>
                     </div>
+
+                    <div th:if="${param.error}"
+                         class="alert alert-danger">
+
+                        No fue posible completar el registro.
+                        Verifique que exista el rol PACIENTE.
+
+                    </div>
+
+                    <form th:action="@{/registro/guardar}"
+                          th:object="${usuario}"
+                          method="post">
+
+                        <div class="mb-3">
+
+                            <label for="nombre"
+                                   class="form-label">
+                                Nombre completo
+                            </label>
+
+                            <input type="text"
+                                   id="nombre"
+                                   th:field="*{nombre}"
+                                   class="form-control"
+                                   placeholder="Ingrese su nombre"
+                                   maxlength="150"
+                                   autocomplete="name"
+                                   required
+                                   autofocus>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label for="email"
+                                   class="form-label">
+                                Correo electrónico
+                            </label>
+
+                            <input type="email"
+                                   id="email"
+                                   th:field="*{email}"
+                                   class="form-control"
+                                   placeholder="nombre@correo.com"
+                                   maxlength="200"
+                                   autocomplete="email"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label for="password"
+                                   class="form-label">
+                                Contraseña
+                            </label>
+
+                            <input type="password"
+                                   id="password"
+                                   th:field="*{password}"
+                                   class="form-control"
+                                   placeholder="Cree una contraseña"
+                                   autocomplete="new-password"
+                                   required>
+
+                            <div class="form-text">
+                                La contraseña se almacenará
+                                de manera codificada.
+                            </div>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary
+                                       w-100 py-2">
+                            Crear cuenta
+                        </button>
+
+                    </form>
+
+                    <div class="text-center my-4">
+
+                        <span class="text-muted">
+                            ¿Ya tiene una cuenta?
+                        </span>
+
+                    </div>
+
+                    <a th:href="@{/login}"
+                       class="btn btn-outline-primary
+                              w-100 py-2">
+                        Volver al inicio de sesión
+                    </a>
+
                 </div>
+
             </div>
 
         </main>
-
-        <footer th:replace="~{general/fragmentos :: footer}">
-        </footer>
 
     </body>
 </html>

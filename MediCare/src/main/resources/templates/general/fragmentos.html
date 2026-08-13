@@ -14,125 +14,108 @@
         <link th:href="@{/webjars/bootstrap/5.3.7/css/bootstrap.min.css}"
               rel="stylesheet">
 
+        <link th:href="@{/css/estilos.css}"
+              rel="stylesheet">
+
     </head>
 
     <body>
 
-        <nav th:fragment="navbar"
-             class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <aside th:fragment="navbar"
+               class="medicare-sidebar">
 
-            <div class="container">
+            <a th:href="@{/}"
+               class="sidebar-brand"
+               title="MediCare">
+                MC
+            </a>
 
-                <a class="navbar-brand fw-bold"
-                   th:href="@{/}">
-                    MediCare
+            <nav class="sidebar-menu">
+
+                <a th:href="@{/}"
+                   class="sidebar-link"
+                   title="Inicio">
+
+                    <span class="sidebar-symbol">IN</span>
+                    <span class="sidebar-label">Inicio</span>
+
                 </a>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#menuPrincipal"
-                        aria-controls="menuPrincipal"
-                        aria-expanded="false"
-                        aria-label="Mostrar navegación">
+                <a th:href="@{/usuarios}"
+                   class="sidebar-link"
+                   title="Usuarios"
+                   sec:authorize="hasRole('ADMIN')">
 
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="sidebar-symbol">US</span>
+                    <span class="sidebar-label">Usuarios</span>
 
-                </button>
+                </a>
 
-                <div class="collapse navbar-collapse"
-                     id="menuPrincipal">
+                <a th:href="@{/roles}"
+                   class="sidebar-link"
+                   title="Roles"
+                   sec:authorize="hasRole('ADMIN')">
 
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <span class="sidebar-symbol">RO</span>
+                    <span class="sidebar-label">Roles</span>
 
-                        <li class="nav-item">
+                </a>
 
-                            <a class="nav-link"
-                               th:href="@{/}">
-                                Inicio
-                            </a>
+                <a th:href="@{/citas}"
+                   class="sidebar-link"
+                   title="Citas médicas"
+                   sec:authorize="hasAnyRole(
+                   'ADMIN', 'MEDICO', 'PACIENTE')">
 
-                        </li>
+                    <span class="sidebar-symbol">CI</span>
+                    <span class="sidebar-label">Citas</span>
 
-                        <li class="nav-item"
-                            sec:authorize="hasRole('ADMIN')">
+                </a>
 
-                            <a class="nav-link"
-                               th:href="@{/usuarios}">
-                                Usuarios
-                            </a>
+                <a th:href="@{/consultas}"
+                   class="sidebar-link"
+                   title="Consultas avanzadas"
+                   sec:authorize="hasAnyRole(
+                   'ADMIN', 'MEDICO', 'PACIENTE')">
 
-                        </li>
+                    <span class="sidebar-symbol">CO</span>
+                    <span class="sidebar-label">Consultas</span>
 
-                        <li class="nav-item"
-                            sec:authorize="hasRole('ADMIN')">
+                </a>
 
-                            <a class="nav-link"
-                               th:href="@{/roles}">
-                                Roles
-                            </a>
+            </nav>
 
-                        </li>
+            <div class="sidebar-account"
+                 sec:authorize="isAuthenticated()">
 
-                        <li class="nav-item"
-                            sec:authorize="hasAnyRole(
-                            'ADMIN', 'MEDICO', 'PACIENTE')">
+                <span class="sidebar-user"
+                      sec:authentication="name"
+                      title="Usuario autenticado">
+                    usuario@medicare.com
+                </span>
 
-                            <a class="nav-link"
-                               th:href="@{/citas}">
-                                Citas médicas
-                            </a>
+                <form th:action="@{/logout}"
+                      method="post">
 
-                        </li>
+                    <button type="submit"
+                            class="sidebar-logout"
+                            title="Cerrar sesión">
+                        SALIR
+                    </button>
 
-                        <li class="nav-item"
-                            sec:authorize="hasAnyRole(
-                            'ADMIN', 'MEDICO', 'PACIENTE')">
+                </form>
 
-                            <a class="nav-link"
-                               th:href="@{/consultas}">
-                                Consultas
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                    <div sec:authorize="isAuthenticated()"
-                         class="d-flex align-items-center gap-3">
-
-                        <span class="text-white">
-
-                            Sesión:
-                            <strong sec:authentication="name">
-                                usuario@medicare.com
-                            </strong>
-
-                        </span>
-
-                        <form th:action="@{/logout}"
-                              method="post">
-
-                            <button type="submit"
-                                    class="btn btn-outline-light">
-                                Cerrar sesión
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
             </div>
-        </nav>
+
+        </aside>
 
         <footer th:fragment="footer"
-                class="bg-dark text-white text-center py-3 mt-5">
+                class="medicare-footer text-center py-4">
 
             <div class="container">
 
                 <p class="mb-0">
-                    MediCare - Plataforma de servicios de salud
+                    MediCare · Plataforma de servicios de salud
                 </p>
 
             </div>

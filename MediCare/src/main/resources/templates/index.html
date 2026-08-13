@@ -4,129 +4,314 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="~{general/fragmentos :: head}">
-        <title>MediCare</title>
+        <title>Dashboard - MediCare</title>
     </head>
 
-    <body class="bg-light">
+    <body>
 
         <header th:replace="~{general/fragmentos :: navbar}">
         </header>
 
-        <main>
+        <main class="medicare-main">
 
-            <section class="bg-primary text-white py-5">
-                <div class="container text-center py-4">
+            <div class="dashboard-topbar">
 
-                    <h1 class="display-4 fw-bold">
-                        Bienvenido a MediCare
+                <div>
+
+                    <p class="text-muted small mb-1">
+                        Panel principal
+                    </p>
+
+                    <h1 class="dashboard-topbar-title h4">
+                        MediCare
                     </h1>
 
-                    <p class="lead mb-0">
-                        Plataforma para administrar usuarios, roles
-                        y citas médicas del centro de salud.
-                    </p>
+                </div>
+
+                <div class="text-end">
+
+                    <span class="dashboard-topbar-user">
+                        Sesión activa
+                    </span>
+
+                    <strong class="d-block"
+                            sec:authentication="name">
+                        usuario@medicare.com
+                    </strong>
 
                 </div>
+
+            </div>
+
+            <section class="dashboard-banner mb-4">
+
+                <p class="mb-2 text-white-50">
+                    Plataforma de servicios de salud
+                </p>
+
+                <h2 class="display-6 fw-bold mb-3"
+                    sec:authorize="hasRole('ADMIN')">
+                    Bienvenido al panel administrativo
+                </h2>
+
+                <h2 class="display-6 fw-bold mb-3"
+                    sec:authorize="hasRole('MEDICO')">
+                    Bienvenido al panel médico
+                </h2>
+
+                <h2 class="display-6 fw-bold mb-3"
+                    sec:authorize="hasRole('PACIENTE')">
+                    Bienvenido a MediCare
+                </h2>
+
+                <p class="mb-0"
+                   sec:authorize="hasRole('ADMIN')">
+
+                    Administre los usuarios, roles y citas
+                    médicas desde un mismo lugar.
+
+                </p>
+
+                <p class="mb-0"
+                   sec:authorize="hasRole('MEDICO')">
+
+                    Consulte y gestione las citas médicas
+                    registradas en el centro de salud.
+
+                </p>
+
+                <p class="mb-0"
+                   sec:authorize="hasRole('PACIENTE')">
+
+                    Consulte la información disponible sobre
+                    las citas y sus especialidades.
+
+                </p>
+
             </section>
 
-            <section class="container py-5">
+            <!-- Indicadores -->
 
-                <div class="text-center mb-5">
-                    <h2>Administración del sistema</h2>
+            <section class="row g-4 mb-5">
 
-                    <p class="text-muted">
-                        Seleccione el módulo que desea consultar.
+                <div class="col-sm-6 col-xl-3"
+                     sec:authorize="hasRole('ADMIN')">
+
+                    <div class="stat-card h-100">
+
+                        <p class="stat-label">
+                            Usuarios registrados
+                        </p>
+
+                        <p class="stat-number"
+                           th:text="${totalUsuarios}">
+                            3
+                        </p>
+
+                        <div class="stat-line"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-xl-3"
+                     sec:authorize="hasRole('ADMIN')">
+
+                    <div class="stat-card h-100">
+
+                        <p class="stat-label">
+                            Roles disponibles
+                        </p>
+
+                        <p class="stat-number"
+                           th:text="${totalRoles}">
+                            3
+                        </p>
+
+                        <div class="stat-line"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+
+                    <div class="stat-card h-100">
+
+                        <p class="stat-label">
+                            Citas médicas
+                        </p>
+
+                        <p class="stat-number"
+                           th:text="${totalCitas}">
+                            2
+                        </p>
+
+                        <div class="stat-line"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+
+                    <div class="stat-card h-100">
+
+                        <p class="stat-label">
+                            Consultas disponibles
+                        </p>
+
+                        <p class="stat-number">
+                            3
+                        </p>
+
+                        <div class="stat-line"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Módulos -->
+
+            <section>
+
+                <div class="page-heading">
+
+                    <h2 class="h3">
+                        Módulos del sistema
+                    </h2>
+
+                    <p>
+                        Seleccione la opción que desea administrar
+                        o consultar.
                     </p>
+
                 </div>
 
                 <div class="row g-4">
 
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow-sm border-0">
+                    <div class="col-md-6 col-xl-3"
+                         sec:authorize="hasRole('ADMIN')">
 
-                            <div class="col-md-6 col-lg-3"
-                                 sec:authorize="hasRole('ADMIN')">
+                        <div class="card medicare-card">
+
+                            <div class="card-body">
+
+                                <span class="badge bg-primary mb-3">
+                                    ADMIN
+                                </span>
+
+                                <h3 class="h5 fw-bold">
+                                    Usuarios
+                                </h3>
 
                                 <p class="text-muted">
-                                    Administre los usuarios registrados
-                                    y sus roles correspondientes.
+                                    Registre, edite y administre
+                                    los usuarios de MediCare.
                                 </p>
 
                                 <a th:href="@{/usuarios}"
                                    class="btn btn-primary">
-                                    Gestionar usuarios
+                                    Abrir módulo
                                 </a>
+
                             </div>
-
                         </div>
+
                     </div>
-                    
-                    <div class="col-md-6 col-lg-3"
-                         sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'PACIENTE')">
 
-                        <div class="card h-100 shadow-sm border-0">
+                    <div class="col-md-6 col-xl-3"
+                         sec:authorize="hasRole('ADMIN')">
 
-                            <div class="card-body text-center p-4">
+                        <div class="card medicare-card">
 
-                                <h3 class="h4">
-                                    Consultas avanzadas
+                            <div class="card-body">
+
+                                <span class="badge bg-primary mb-3">
+                                    ADMIN
+                                </span>
+
+                                <h3 class="h5 fw-bold">
+                                    Roles
                                 </h3>
 
                                 <p class="text-muted">
-                                    Consulte citas por estado, rango de fechas
-                                    o coincidencia de especialidad.
-                                </p>
-
-                                <a th:href="@{/consultas}"
-                                   class="btn btn-primary">
-                                    Realizar consultas
-                                </a>
-
-                            </div>
-                        </div>
-</div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow-sm border-0">
-
-                            <div class="col-md-6 col-lg-3"
-                                 sec:authorize="hasRole('ADMIN')">
-
-                                <p class="text-muted">
-                                    Consulte y administre los roles
-                                    disponibles en MediCare.
+                                    Administre los permisos y roles
+                                    disponibles en el sistema.
                                 </p>
 
                                 <a th:href="@{/roles}"
                                    class="btn btn-primary">
-                                    Gestionar roles
+                                    Abrir módulo
                                 </a>
-                            </div>
 
+                            </div>
                         </div>
+
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow-sm border-0">
+                    <div class="col-md-6 col-xl-3">
 
-                            <div class="col-md-6 col-lg-3"
-                                 sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'PACIENTE')">
+                        <div class="card medicare-card">
+
+                            <div class="card-body">
+
+                                <span class="badge bg-success mb-3">
+                                    SALUD
+                                </span>
+
+                                <h3 class="h5 fw-bold">
+                                    Citas médicas
+                                </h3>
 
                                 <p class="text-muted">
-                                    Registre, consulte y actualice
-                                    las citas médicas.
+                                    Consulte la información de las
+                                    citas médicas registradas.
                                 </p>
 
                                 <a th:href="@{/citas}"
                                    class="btn btn-primary">
-                                    Gestionar citas
+                                    Abrir módulo
                                 </a>
-                            </div>
 
+                            </div>
                         </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+
+                        <div class="card medicare-card">
+
+                            <div class="card-body">
+
+                                <span class="badge bg-info text-white mb-3">
+                                    JPA
+                                </span>
+
+                                <h3 class="h5 fw-bold">
+                                    Consultas
+                                </h3>
+
+                                <p class="text-muted">
+                                    Busque citas por estado, fechas
+                                    o especialidad.
+                                </p>
+
+                                <a th:href="@{/consultas}"
+                                   class="btn btn-primary">
+                                    Consultar
+                                </a>
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
+
             </section>
 
         </main>

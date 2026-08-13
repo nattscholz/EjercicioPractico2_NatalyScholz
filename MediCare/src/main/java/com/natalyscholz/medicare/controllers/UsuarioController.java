@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.natalyscholz.medicare.service.CorreoService;
+import org.springframework.mail.MailException;
 
 @Controller
 public class UsuarioController {
@@ -107,10 +108,17 @@ public class UsuarioController {
 
         if (esUsuarioNuevo) {
 
-            correoService.enviarCorreoBienvenida(
-                    usuario.getEmail(),
-                    usuario.getNombre()
-            );
+            try {
+
+                correoService.enviarCorreoBienvenida(
+                        usuario.getEmail(),
+                        usuario.getNombre()
+                );
+
+            } catch (MailException e) {
+
+                return "redirect:/usuarios?correoError";
+            }
         }
 
         return "redirect:/usuarios";
