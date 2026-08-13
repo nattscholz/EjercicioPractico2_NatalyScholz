@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.natalyscholz.medicare.service.CorreoService;
 
 @Controller
 public class RegistroController {
@@ -32,6 +33,9 @@ public class RegistroController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private CorreoService correoService;
 
     @GetMapping("/registro")
     public String mostrarRegistro(Model model) {
@@ -67,7 +71,12 @@ public class RegistroController {
         usuario.setRol(rolPaciente);
         usuario.setActivo(true);
 
-        usuarioService.save(usuario);
+       usuarioService.save(usuario);
+
+        correoService.enviarCorreoBienvenida(
+                usuario.getEmail(),
+                usuario.getNombre()
+        );
 
         return "redirect:/login?registro";
     }

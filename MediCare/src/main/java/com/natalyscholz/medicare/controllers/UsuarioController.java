@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.natalyscholz.medicare.service.CorreoService;
 
 @Controller
 public class UsuarioController {
@@ -34,6 +35,9 @@ public class UsuarioController {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private CorreoService correoService;
 
     @GetMapping("/usuarios")
     public String listar(Model model) {
@@ -62,7 +66,9 @@ public class UsuarioController {
             return "redirect:/usuarios";
         }
 
-        if (usuario.getId() != null) {
+        boolean esUsuarioNuevo = usuario.getId() == null;
+
+        if (!esUsuarioNuevo) {
 
             Usuario usuarioExistente
                     = usuarioService.getUsuario(usuario.getId());
@@ -99,9 +105,16 @@ public class UsuarioController {
         usuario.setRol(rol);
         usuarioService.save(usuario);
 
+        if (esUsuarioNuevo) {
+
+            correoService.enviarCorreoBienvenida(
+                    usuario.getEmail(),
+                    usuario.getNombre()
+            );
+        }
+
         return "redirect:/usuarios";
     }
-
     @GetMapping("/usuarios/editar/{id}")
     public String editar(
             @PathVariable Long id,
