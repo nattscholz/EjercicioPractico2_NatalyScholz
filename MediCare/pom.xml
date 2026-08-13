@@ -97,7 +97,12 @@
 			<scope>test</scope>
 		</dependency>
                 
-                    <!-- Dependencias de Spring Boot que ya existen -->
+                <dependency>
+                    <groupId>org.thymeleaf.extras</groupId>
+                    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+                </dependency>
+                
+                <!-- Dependencias de Spring Boot que ya existen -->
                 <dependency>
                     <groupId>org.webjars</groupId>
                     <artifactId>bootstrap</artifactId>

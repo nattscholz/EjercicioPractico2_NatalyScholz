@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="~{general/fragmentos :: head}">
         <title>Detalle de la cita médica</title>
@@ -104,9 +105,9 @@
 
                             <div class="d-flex gap-2">
 
-                                <a th:href="@{/citas/editar/{id}
-                                   (id=${citaMedica.id})}"
-                                   class="btn btn-warning">
+                                <a th:href="@{/citas/editar/{id}(id=${citaMedica.id})}"
+                                   class="btn btn-warning"
+                                   sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">
                                     Editar
                                 </a>
 

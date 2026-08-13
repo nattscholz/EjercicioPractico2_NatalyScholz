@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="~{general/fragmentos :: head}">
         <title>MediCare</title>
@@ -43,8 +44,8 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm border-0">
 
-                            <div class="card-body text-center p-4">
-                                <h3 class="h4">Usuarios</h3>
+                            <div class="col-md-6 col-lg-3"
+                                 sec:authorize="hasRole('ADMIN')">
 
                                 <p class="text-muted">
                                     Administre los usuarios registrados
@@ -59,12 +60,37 @@
 
                         </div>
                     </div>
+                    
+                    <div class="col-md-6 col-lg-3"
+                         sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'PACIENTE')">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body text-center p-4">
+
+                                <h3 class="h4">
+                                    Consultas avanzadas
+                                </h3>
+
+                                <p class="text-muted">
+                                    Consulte citas por estado, rango de fechas
+                                    o coincidencia de especialidad.
+                                </p>
+
+                                <a th:href="@{/consultas}"
+                                   class="btn btn-primary">
+                                    Realizar consultas
+                                </a>
+
+                            </div>
+                        </div>
+</div>
 
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm border-0">
 
-                            <div class="card-body text-center p-4">
-                                <h3 class="h4">Roles</h3>
+                            <div class="col-md-6 col-lg-3"
+                                 sec:authorize="hasRole('ADMIN')">
 
                                 <p class="text-muted">
                                     Consulte y administre los roles
@@ -83,8 +109,8 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm border-0">
 
-                            <div class="card-body text-center p-4">
-                                <h3 class="h4">Citas médicas</h3>
+                            <div class="col-md-6 col-lg-3"
+                                 sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'PACIENTE')">
 
                                 <p class="text-muted">
                                     Registre, consulte y actualice

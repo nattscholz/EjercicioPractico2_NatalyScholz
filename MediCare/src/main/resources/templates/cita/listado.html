@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="~{general/fragmentos :: head}">
         <title>Gestión de citas médicas</title>
@@ -28,7 +29,8 @@
                 </div>
 
                 <a th:href="@{/citas/nueva}"
-                   class="btn btn-primary">
+                   class="btn btn-primary"
+                   sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">
                     Agregar cita
                 </a>
 
@@ -115,20 +117,20 @@
                                             Detalle
                                         </a>
 
-                                        <a th:href="@{/citas/editar/{id}
-                                           (id=${cita.id})}"
-                                           class="btn btn-warning btn-sm">
-                                            Editar
-                                        </a>
+                                        <span sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">
 
-                                        <a th:href="@{/citas/eliminar/{id}
-                                           (id=${cita.id})}"
-                                           class="btn btn-danger btn-sm"
-                                           onclick="return confirm(
-                                           '¿Desea eliminar esta cita?'
-                                           );">
-                                            Eliminar
-                                        </a>
+                                            <a th:href="@{/citas/editar/{id}(id=${cita.id})}"
+                                               class="btn btn-warning btn-sm">
+                                                Editar
+                                            </a>
+
+                                            <a th:href="@{/citas/eliminar/{id}(id=${cita.id})}"
+                                               class="btn btn-danger btn-sm"
+                                               onclick="return confirm('¿Desea eliminar esta cita?');">
+                                                Eliminar
+                                            </a>
+
+                                        </span>
 
                                     </td>
                                 </tr>
